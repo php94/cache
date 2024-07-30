@@ -1,0 +1,14 @@
+{
+    "name": "php94/cache",
+    "description": "psr16的基本实现",
+    "type": "library",
+    "license": "GPL-3.0",
+    "require": {
+        "psr/simple-cache": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHP94\\Cache\\": "src/"
+        }
+    }
+}
