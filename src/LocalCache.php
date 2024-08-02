@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PHP94\Cache;
 
+use Composer\Autoload\ClassLoader;
 use DateInterval;
 use Exception;
 use Psr\SimpleCache\CacheInterface;
+use ReflectionClass;
 use Throwable;
 
 class LocalCache implements CacheInterface
@@ -16,7 +18,8 @@ class LocalCache implements CacheInterface
     public function __construct(string $cache_dir = null)
     {
         if (is_null($cache_dir)) {
-            $cache_dir = __DIR__ . '/cache';
+            $root = dirname((new ReflectionClass(ClassLoader::class))->getFileName(), 3);
+            $cache_dir = $root . '/runtime/cache';
         }
         if (!is_dir($cache_dir)) {
             if (false === mkdir($cache_dir, 0755, true)) {
