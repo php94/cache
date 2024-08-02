@@ -13,8 +13,11 @@ class LocalCache implements CacheInterface
 {
     private $cache_dir;
 
-    public function __construct(string $cache_dir)
+    public function __construct(string $cache_dir = null)
     {
+        if (is_null($cache_dir)) {
+            $cache_dir = __DIR__ . '/cache';
+        }
         if (!is_dir($cache_dir)) {
             if (false === mkdir($cache_dir, 0755, true)) {
                 throw new Exception('mkdir [' . $cache_dir . '] failure!');
